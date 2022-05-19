@@ -1,0 +1,297 @@
+<style>
+ @media (min-width: 992px) and (max-width : 2560px) {
+.c-content-grid__items {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 -.9375rem;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  margin-bottom: 63px;
+}
+     .article-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    order: 1;
+    width: 80%;
+    padding-left: 180px;
+}
+  .c-content-grid__article {
+    margin: 0 auto;
+    width: 33%;
+    padding: 0 .9375rem;
+   	margin-top: 50px;
+}
+  .c-content-tile.m-stack-for-large .c-content-tile__section {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    padding: 1.25rem 0 0;
+    width: 100%;
+    max-width: 100%;
+}
+  .c-content-tile__actions {
+    margin: 1.25rem 0 0;
+    text-align: center;
+}
+  h3.c-content-tile__title {
+    display: block;
+    text-align: center;
+    height: 47px;
+    text-transform: uppercase;
+}
+  .c-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #672f25;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    font-size: .75rem;
+    font-family: inherit;
+    font-weight: 900;
+    line-height: 1;
+    min-width: 7.625rem;
+    outline-width: 0;
+    padding: .625rem .75rem .6875rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: background-color .25s ease-out,color .25s ease-out;
+    transition: background-color .25s ease-out,color .25s ease-out;
+    vertical-align: middle;
+    background-color: #ffa400;
+    border: 1px solid transparent;
+    color: #2d006a;
+    font-family: 'Oswald';
+}
+  h2.blog-heading {
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+}
+   .article-image img {
+/*     height: 213.36px; */
+    width: 100%;
+}
+   .article-image {
+    display: block;
+    margin-bottom: 14px;
+}
+  }
+  
+  @media (max-width: 768px) {
+   .c-button {
+    -webkit-appearance: none;
+    font-family: 'Oswald';
+    -moz-appearance: none;
+    appearance: none;
+    background: #672f25;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    font-size: .75rem;
+    font-family: inherit;
+    font-weight: 900;
+    line-height: 1;
+    outline-width: 0;
+    padding: .625rem .75rem .6875rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: background-color .25s ease-out,color .25s ease-out;
+    transition: background-color .25s ease-out,color .25s ease-out;
+    vertical-align: middle;
+    background-color: #ffa400;
+    border: 1px solid transparent;
+    color: #2d006a;
+    margin-bottom: 20px;
+}
+  .c-content-grid__article {
+    padding: 0 .9375rem;
+}
+    h3.c-content-tile__title {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    }
+    
+    .c-content-tile__actions {
+    margin: 1.25rem 0 0;
+    text-align: center;
+}
+    .article-image img {
+    width: 100%;
+    margin-bottom: 13px;
+}
+    h2.blog-heading {
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+    .home-section {
+    padding-top: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+     a.c-button.viewall {
+  margin-left: 98px;
+   
+      
+  }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+  .article-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    order: 1;
+    width: 80%;
+    padding-left: 0;
+}
+ 
+  
+  }
+</style>
+
+
+<div data-section-id="{{ section.id }}" data-section-type="featured-blog">
+
+  {%- assign sectionHeading = section.settings.title | escape -%}
+  {%- assign border = section.settings.border -%}
+  {%- assign featuredBlog = section.settings.blog -%}
+
+  <section class="home-section content-area content-area-blogs
+    {% if sectionHeading != blank %}has-heading{% endif %}
+    {% if border %}has-border{% endif %}">
+
+    {% if sectionHeading != blank %}
+      <h2 class="blog-heading">{{ sectionHeading }}</h2>
+    {% endif %}
+    <div class="c-content-grid__items">
+      {% if featuredBlog != "" %}
+
+        {% for article in blogs[featuredBlog].articles limit: 3 %}
+          <article class="c-content-grid__article">
+            
+
+            <div class="content">
+              {% if article.image %}
+                <a href="{{ article.url }}" class="article-image image-wrap">
+                  {%
+                    include 'rimg'
+                    img: article.image,
+                    alt: article.title,
+                    size: '600x600',
+                    lazy: true
+                  %}
+                </a>
+              {% endif %} 
+            </div>
+            <div class="c-content-tile__content  c-content-tile__section"> 
+
+              <h3 class="c-content-tile__title"> <a href="{{ article.url }}">{{ article.title }}</a></h3>
+            </div>
+             <div class="c-content-tile__actions h-text-align-left">  
+      </div>
+
+          </article>
+
+        {% endfor %}
+      {% else %}
+        {% for i in (1..4) %}
+          <li class="article {% include 'for-looper' %}">
+            <a class="date" href="#">{{'now' | date: "%s" | date: "%B %d, %Y"}}</a>
+            <a class="title" href="#">{{ 'onboarding.blog_title' | t }}</a>
+
+            <div class="rte content">
+              <a href="#" class="article-image image-wrap">
+                {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+                {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              </a>
+
+              {{ 'onboarding.blog_excerpt' | t }}
+            </div>
+          </li>
+        {% endfor %}
+      {% endif %}
+            <a class="c-button viewall" href="https://www.gkhair.com/blogs/all-post">View All</a>  
+
+    </div>
+    
+  </section>
+    <!-- show blog article details here -->
+
+
+
+<style>
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+  
+.pagination li {
+  display: inline; 
+  margin: 0 5px;
+}
+  a.c-button.viewall {
+    margin-top: 43px;
+    font-size: 16px;
+    min-width: 9.625rem;
+}
+</style>
+</div>
+
+{% schema %}
+{
+  "name": "GK BLOGS",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "GKHair Blog posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "border",
+      "label": "Show border",
+      "default": true
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog posts"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Blog posts New",
+      "settings": {
+        "border":true,
+        "blog": ""
+      }
+    }
+  ]
+}
+
+{% endschema %}
+
